@@ -19,7 +19,7 @@ func TestNewUser(t *testing.T) {
 			user1.FirstName,
 			user1.LastName,
 			user1.EmailAddress,
-			user1.Company,
+			user1.Organization,
 			user1.Description,
 		)
 
@@ -28,7 +28,7 @@ func TestNewUser(t *testing.T) {
 		assert.Equal(t, user2.FirstName, user1.FirstName)
 		assert.Equal(t, user2.LastName, user1.LastName)
 		assert.Equal(t, user2.EmailAddress, user1.EmailAddress)
-		assert.Equal(t, user2.Company, user1.Company)
+		assert.Equal(t, user2.Organization, user1.Organization)
 		assert.Equal(t, user2.Description, user1.Description)
 	})
 }

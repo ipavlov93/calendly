@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"event-calendar/dmodel"
+	"event-calendar/internal/dto/dmodel"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/jmoiron/sqlx"

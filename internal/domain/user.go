@@ -13,17 +13,24 @@ type User struct {
 	LastName     string
 	EmailAddress string
 
-	Company     string
-	Description string
+	Organization string
+	Description  string
 }
 
-func NewUser(uuid string, firstName, lastName, emailAddress, company, description string) *User {
+func NewUser(
+	uuid string,
+	firstName string,
+	lastName string,
+	emailAddress string,
+	organization string,
+	description string,
+) *User {
 	return &User{
 		UUID:         uuid,
 		FirstName:    firstName,
 		LastName:     lastName,
 		EmailAddress: emailAddress,
-		Company:      company,
+		Organization: organization,
 		Description:  description,
 	}
 }

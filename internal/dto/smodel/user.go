@@ -12,9 +12,8 @@ type User struct {
 	FirstName    string       `json:"firstName"`
 	LastName     string       `json:"lastName"`
 	EmailAddress mail.Address `json:"email_address"`
-
-	Company     string `json:"-"`
-	Description string `json:"description"`
+	Organization string       `json:"organization"`
+	Description  string       `json:"description"`
 }
 
 func (p User) String() string {

@@ -1,10 +1,10 @@
 package dmodel_test
 
 import (
+	"event-calendar/internal/domain"
+	"event-calendar/internal/dto/dmodel"
 	"fmt"
 	"testing"
-
-	"event-calendar/dmodel"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -30,7 +30,7 @@ func TestNewParticipant(t *testing.T) {
 	// happy flow
 	t.Run("should create participant and init giving fields (with user ID)", func(t *testing.T) {
 		// ARRANGE
-		user1 := createDummyUser(1)
+		user1 := domain.createDummyUser(1)
 
 		// ACT
 		participant2 := dmodel.NewParticipant(

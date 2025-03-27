@@ -2,7 +2,8 @@ package userservice
 
 import (
 	"context"
-	"event-calendar/dmodel"
+
+	"event-calendar/internal/dto/dmodel"
 )
 
 type UserRepository interface {

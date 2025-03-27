@@ -13,7 +13,7 @@ type User struct {
 	FirstName    string    `db:"first_name"`
 	LastName     string    `db:"last_name"`
 	EmailAddress string    `db:"email_address"`
-	Company      string    `db:"company"`
+	Organization string    `db:"organization"`
 	Description  string    `db:"description"`
 	CreatedAt    time.Time `db:"created_at"`
 	UpdatedAt    time.Time `db:"updated_at"`
@@ -21,13 +21,20 @@ type User struct {
 	DeletedAt sql.NullTime `db:"deleted_at"`
 }
 
-func NewUser(uuid string, firstName, lastName, emailAddress, company, description string) *User {
+func NewUser(
+	uuid string,
+	firstName string,
+	lastName string,
+	emailAddress string,
+	company string,
+	description string,
+) *User {
 	return &User{
 		UUID:         uuid,
 		FirstName:    firstName,
 		LastName:     lastName,
 		EmailAddress: emailAddress,
-		Company:      company,
+		Organization: company,
 		Description:  description,
 	}
 }

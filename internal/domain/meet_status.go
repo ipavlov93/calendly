@@ -1,4 +1,4 @@
-package dmodel
+package domain
 
 import "fmt"
 

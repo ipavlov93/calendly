@@ -1,4 +1,4 @@
-package dmodel
+package domain
 
 import (
 	"fmt"
@@ -19,7 +19,6 @@ type Meet struct {
 
 	OrganizerID Participant
 	CreatedBy   Participant
-	CreatedAt   time.Time
 }
 
 // NewMeet init meet with given fields.
@@ -128,8 +127,6 @@ func (m *Meet) DeleteParticipant(participantID int64) error {
 	if participantID < 1 {
 		return nil
 	}
-	//	return fmt.Errorf("validation error: invalid participant ID")
-	//}
 
 	for i, participant := range m.Participants {
 		if participant.ID == participantID {

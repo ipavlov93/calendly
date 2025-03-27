@@ -4,10 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"event-calendar/repository"
 	"fmt"
 
-	"event-calendar/dmodel"
+	"event-calendar/internal/dto/dmodel"
+	"event-calendar/repository"
 
 	"github.com/jmoiron/sqlx"
 )

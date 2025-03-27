@@ -2,10 +2,10 @@ package userservice
 
 import (
 	"context"
+
+	"event-calendar/internal/dto/smodel"
 	dmapper "event-calendar/mapper/user/dmodel"
 	smapper "event-calendar/mapper/user/smodel"
-
-	"event-calendar/smodel"
 )
 
 type UserService struct {
