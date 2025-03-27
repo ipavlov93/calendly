@@ -9,15 +9,15 @@ import (
 type Participant struct {
 	ID int64 `db:"id"`
 	// fields set by participant himself or auth provider
-	FirstName      string    `db:"first_name"`
-	LastName       string    `db:"last_name"`
-	ContactEmail   string    `db:"contact_email"`
-	UserID         int64     `db:"user_id"`
-	Organization   string    `db:"organization"`
-	Description    string    `db:"description"`
-	AvatarFileName string    `db:"avatar_file_name"`
-	CreatedAt      time.Time `db:"created_at"`
-	UpdatedAt      time.Time `db:"updated_at"`
+	FirstName      string        `db:"first_name"`
+	LastName       string        `db:"last_name"`
+	ContactEmail   string        `db:"contact_email"`
+	UserID         sql.NullInt64 `db:"user_id"`
+	Organization   string        `db:"organization"`
+	Description    string        `db:"description"`
+	AvatarFileName string        `db:"avatar_file_name"`
+	CreatedAt      time.Time     `db:"created_at"`
+	UpdatedAt      time.Time     `db:"updated_at"`
 	// soft delete
 	DeletedAt sql.NullTime `db:"deleted_at"`
 }
@@ -37,10 +37,13 @@ func NewParticipant(
 	}
 
 	return &Participant{
-		FirstName:      firstName,
-		LastName:       lastName,
-		ContactEmail:   emailAddress,
-		UserID:         uID,
+		FirstName:    firstName,
+		LastName:     lastName,
+		ContactEmail: emailAddress,
+		UserID: sql.NullInt64{
+			Int64: uID,
+			Valid: uID > 0,
+		},
 		Organization:   organization,
 		Description:    description,
 		AvatarFileName: avatarFileName,

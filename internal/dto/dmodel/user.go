@@ -10,13 +10,13 @@ type User struct {
 	ID   int64  `db:"id"`
 	UUID string `db:"uuid"`
 	// fields set by participant himself or auth provider
-	FirstName    string    `db:"first_name"`
-	LastName     string    `db:"last_name"`
-	EmailAddress string    `db:"email_address"`
-	Organization string    `db:"organization"`
-	Description  string    `db:"description"`
-	CreatedAt    time.Time `db:"created_at"`
-	UpdatedAt    time.Time `db:"updated_at"`
+	FirstName    string         `db:"first_name"`
+	LastName     string         `db:"last_name"`
+	EmailAddress string         `db:"email_address"`
+	Organization string         `db:"organization"`
+	Description  sql.NullString `db:"description"`
+	CreatedAt    time.Time      `db:"created_at"`
+	UpdatedAt    time.Time      `db:"updated_at"`
 	// soft delete
 	DeletedAt sql.NullTime `db:"deleted_at"`
 }
@@ -35,7 +35,10 @@ func NewUser(
 		LastName:     lastName,
 		EmailAddress: emailAddress,
 		Organization: company,
-		Description:  description,
+		Description: sql.NullString{
+			String: description,
+			Valid:  len(description) > 0,
+		},
 	}
 }
 
