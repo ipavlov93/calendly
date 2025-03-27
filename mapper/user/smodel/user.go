@@ -47,6 +47,6 @@ func MapDto(user dmodel.User) smodel.User {
 			Address: user.EmailAddress,
 		},
 		Organization: user.Organization,
-		Description:  user.Description,
+		Description:  user.Description.String,
 	}
 }
