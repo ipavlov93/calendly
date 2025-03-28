@@ -6,7 +6,7 @@ create table users
     firstname     varchar(50) unique      not null,
     lastname      varchar(50) unique      not null,
     email_address varchar(100) unique     not null,
-    company       varchar(100)            not null,
+    organization  varchar(100)            not null,
     description   varchar(150) null,
     created_at    timestamp default now() not null,
     updated_at    timestamp default now() not null,
