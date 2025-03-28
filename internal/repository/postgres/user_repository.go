@@ -6,8 +6,9 @@ import (
 	"errors"
 	"fmt"
 
-	"event-calendar/internal/dto/dmodel"
-	"event-calendar/repository"
+	"event-calendar/internal/domain"
+	mapper "event-calendar/internal/mapper/user/dmodel"
+	"event-calendar/internal/repository"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -45,21 +46,23 @@ func (repo UserRepository) GetUsersCount(ctx context.Context) (int64, error) {
 	return count, nil
 }
 
-func (repo UserRepository) GetUserByID(ctx context.Context, id int64) (user dmodel.User, err error) {
-	err = repo.db.GetContext(ctx, &user,
+func (repo UserRepository) GetUserByID(ctx context.Context, id int64) (user domain.User, err error) {
+	userDto := mapper.UserToUserDto(user)
+	err = repo.db.GetContext(ctx, &userDto,
 		`SELECT * FROM users
 				WHERE id = $1`, id)
 	return user, err
 }
 
-func (repo UserRepository) GetUserByUUID(ctx context.Context, uuid string) (user dmodel.User, err error) {
-	err = repo.db.GetContext(ctx, &user,
+func (repo UserRepository) GetUserByUUID(ctx context.Context, uuid string) (user domain.User, err error) {
+	userDto := mapper.UserToUserDto(user)
+	err = repo.db.GetContext(ctx, &userDto,
 		`SELECT * FROM users
 				WHERE uuid = $1`, uuid)
 	return user, err
 }
 
-func (repo UserRepository) CreateUser(ctx context.Context, user dmodel.User) (userID int64, err error) {
+func (repo UserRepository) CreateUser(ctx context.Context, user domain.User) (userID int64, err error) {
 	err = repo.db.QueryRowContext(
 		ctx,
 		`INSERT INTO users (uuid, first_name, last_name, email_address, description)

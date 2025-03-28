@@ -1,11 +1,12 @@
 package smodel
 
 import (
+	"fmt"
+	"net/mail"
+
 	"event-calendar/internal/domain"
 	"event-calendar/internal/dto/dmodel"
 	"event-calendar/internal/dto/smodel"
-	"fmt"
-	"net/mail"
 )
 
 func UserToUserDto(user domain.User) smodel.User {

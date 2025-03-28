@@ -2,6 +2,7 @@ package dmodel
 
 import (
 	"database/sql"
+
 	"event-calendar/internal/domain"
 	"event-calendar/internal/dto/dmodel"
 	"event-calendar/internal/dto/smodel"
