@@ -22,7 +22,7 @@ type Meet struct {
 }
 
 // NewMeet init meet with given fields.
-// Set status SCHEDULED.
+// Set status CREATED.
 func NewMeet(
 	title string,
 	from, to time.Time,
@@ -35,7 +35,7 @@ func NewMeet(
 }
 
 // NewScheduledMeet init meet with given fields.
-// Set status CREATED.
+// Set status SCHEDULED.
 func NewScheduledMeet(
 	title string,
 	from, to time.Time,

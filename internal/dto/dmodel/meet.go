@@ -2,8 +2,9 @@ package dmodel
 
 import (
 	"database/sql"
-	"event-calendar/internal/domain"
 	"time"
+
+	"event-calendar/internal/domain"
 )
 
 type Meet struct {
@@ -17,44 +18,6 @@ type Meet struct {
 	Description string            `db:"description"`
 	Link        sql.NullString    `db:"link"`
 	CreatedAt   time.Time         `db:"created_at"`
-}
-
-// NewMeet init meet with given fields.
-// Set status SCHEDULED.
-func NewMeet(
-	title string,
-	from, to time.Time,
-	description string,
-	creatorID int64,
-	organizerID int64,
-) Meet {
-	return newMeet(
-		title,
-		domain.CREATED,
-		from, to,
-		description,
-		creatorID,
-		organizerID,
-	)
-}
-
-// NewScheduledMeet init meet with given fields.
-// Set status CREATED.
-func NewScheduledMeet(
-	title string,
-	from, to time.Time,
-	description string,
-	creatorID int64,
-	organizerID int64,
-) Meet {
-	return newMeet(
-		title,
-		domain.SCHEDULED,
-		from, to,
-		description,
-		creatorID,
-		organizerID,
-	)
 }
 
 // newMeet init meet with given fields.
