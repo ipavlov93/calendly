@@ -22,40 +22,12 @@ type Participant struct {
 	DeletedAt sql.NullTime `db:"deleted_at"`
 }
 
-func NewParticipant(
-	firstName string,
-	lastName string,
-	emailAddress string,
-	organization string,
-	description string,
-	avatarFileName string,
-	userID ...int64,
-) *Participant {
-	uID := int64(0)
-	if len(userID) > 0 {
-		uID = userID[0]
-	}
-
-	return &Participant{
-		FirstName:    firstName,
-		LastName:     lastName,
-		ContactEmail: emailAddress,
-		UserID: sql.NullInt64{
-			Int64: uID,
-			Valid: uID > 0,
-		},
-		Organization: organization,
-		Description: sql.NullString{
-			String: description,
-			Valid:  len(description) > 0,
-		},
-		AvatarFileName: sql.NullString{
-			String: avatarFileName,
-			Valid:  len(avatarFileName) > 0,
-		},
-	}
-}
-
 func (p Participant) String() string {
-	return fmt.Sprintf("ID:%d, FullName:%s %s", p.ID, p.FirstName, p.LastName)
+	return fmt.Sprintf(
+		"ID: %d, FullName: %s %s, Email: %s",
+		p.ID,
+		p.FirstName,
+		p.LastName,
+		p.ContactEmail,
+	)
 }

@@ -21,27 +21,6 @@ type User struct {
 	DeletedAt sql.NullTime `db:"deleted_at"`
 }
 
-func NewUser(
-	uuid string,
-	firstName string,
-	lastName string,
-	emailAddress string,
-	company string,
-	description string,
-) *User {
-	return &User{
-		UUID:         uuid,
-		FirstName:    firstName,
-		LastName:     lastName,
-		EmailAddress: emailAddress,
-		Organization: company,
-		Description: sql.NullString{
-			String: description,
-			Valid:  len(description) > 0,
-		},
-	}
-}
-
 func (p User) String() string {
-	return fmt.Sprintf("ID:%d, FullName:%s %s", p.ID, p.FirstName, p.LastName)
+	return fmt.Sprintf("ID: %d, FullName: %s %s, UUID: %s, Email: %s", p.ID, p.FirstName, p.LastName, p.UUID, p.EmailAddress)
 }

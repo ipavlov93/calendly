@@ -17,5 +17,5 @@ type User struct {
 }
 
 func (p User) String() string {
-	return fmt.Sprintf("ID:%d, FullName:%s %s", p.ID, p.FirstName, p.LastName)
+	return fmt.Sprintf("ID: %d, FullName: %s %s, UUID: %s, Email: %s", p.ID, p.FirstName, p.LastName, p.UUID, p.EmailAddress)
 }

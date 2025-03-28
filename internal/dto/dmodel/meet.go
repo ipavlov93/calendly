@@ -19,24 +19,3 @@ type Meet struct {
 	Link        sql.NullString    `db:"link"`
 	CreatedAt   time.Time         `db:"created_at"`
 }
-
-// newMeet init meet with given fields.
-func newMeet(
-	title string,
-	status domain.MeetStatus,
-	from, to time.Time,
-	description string,
-	creatorID int64,
-	organizerID int64,
-) Meet {
-	meet := Meet{
-		Title:       title,
-		Status:      status,
-		From:        from,
-		To:          to,
-		Description: description,
-		OrganizerID: organizerID,
-		CreatedBy:   creatorID,
-	}
-	return meet
-}
