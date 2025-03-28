@@ -25,13 +25,13 @@ func NewParticipant(
 	description string,
 	avatarFileName string,
 	userID ...int64,
-) *Participant {
+) Participant {
 	uID := int64(0)
 	if len(userID) > 0 {
 		uID = userID[0]
 	}
 
-	return &Participant{
+	return Participant{
 		FirstName:    firstName,
 		LastName:     lastName,
 		ContactEmail: emailAddress,

@@ -24,8 +24,8 @@ func NewUser(
 	emailAddress string,
 	organization string,
 	description string,
-) *User {
-	return &User{
+) User {
+	return User{
 		UUID:         uuid,
 		FirstName:    firstName,
 		LastName:     lastName,
