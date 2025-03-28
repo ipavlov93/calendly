@@ -7,6 +7,7 @@ import (
 	"fmt"
 
 	"event-calendar/internal/domain"
+	"event-calendar/internal/dto/dmodel"
 	mapper "event-calendar/internal/mapper/user/dmodel"
 	"event-calendar/internal/repository"
 
@@ -47,19 +48,19 @@ func (repo UserRepository) GetUsersCount(ctx context.Context) (int64, error) {
 }
 
 func (repo UserRepository) GetUserByID(ctx context.Context, id int64) (user domain.User, err error) {
-	userDto := mapper.UserToUserDto(user)
+	var userDto dmodel.User
 	err = repo.db.GetContext(ctx, &userDto,
 		`SELECT * FROM users
 				WHERE id = $1`, id)
-	return user, err
+	return mapper.UserDtoToUser(userDto), err
 }
 
 func (repo UserRepository) GetUserByUUID(ctx context.Context, uuid string) (user domain.User, err error) {
-	userDto := mapper.UserToUserDto(user)
+	var userDto dmodel.User
 	err = repo.db.GetContext(ctx, &userDto,
 		`SELECT * FROM users
 				WHERE uuid = $1`, uuid)
-	return user, err
+	return mapper.UserDtoToUser(userDto), err
 }
 
 func (repo UserRepository) CreateUser(ctx context.Context, user domain.User) (userID int64, err error) {
