@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"event-calendar/internal/dto/dmodel"
+	"event-calendar/internal/domain/test"
 
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/jmoiron/sqlx"
@@ -48,17 +48,13 @@ func TestGetUserByID(t *testing.T) {
 	repo := UserRepository{db: sqlxDB}
 
 	// Define expected user
-	expectedUser := dmodel.User{
-		ID:           1,
-		UUID:         "1",
-		FirstName:    "FirstName1",
-		LastName:     "LastName1",
-		EmailAddress: "1@test.com",
-	}
+	expectedUser := test.CreateTestUser(1)
 
 	// Mock the query
-	rows := sqlmock.NewRows([]string{"id", "uuid", "first_name", "last_name", "email_address"}).
-		AddRow(expectedUser.ID, expectedUser.UUID, expectedUser.FirstName, expectedUser.LastName, expectedUser.EmailAddress)
+	rows := sqlmock.NewRows(
+		[]string{"id", "uuid", "first_name", "last_name", "email_address", "organization", "description"}).
+		AddRow(expectedUser.ID, expectedUser.UUID, expectedUser.FirstName, expectedUser.LastName, expectedUser.EmailAddress, expectedUser.Organization, expectedUser.Description)
+
 	mock.ExpectQuery(`(?i)SELECT \* FROM users WHERE id = \$1`).
 		WithArgs(expectedUser.ID).
 		WillReturnRows(rows)
@@ -84,17 +80,13 @@ func TestGetUserByUUID(t *testing.T) {
 	repo := UserRepository{db: sqlxDB}
 
 	// Define expected user
-	expectedUser := dmodel.User{
-		ID:           1,
-		UUID:         "1",
-		FirstName:    "FirstName1",
-		LastName:     "LastName1",
-		EmailAddress: "1@test.com",
-	}
+	expectedUser := test.CreateTestUser(1)
 
 	// Mock the query
-	rows := sqlmock.NewRows([]string{"id", "uuid", "first_name", "last_name", "email_address"}).
-		AddRow(expectedUser.ID, expectedUser.UUID, expectedUser.FirstName, expectedUser.LastName, expectedUser.EmailAddress)
+	rows := sqlmock.NewRows(
+		[]string{"id", "uuid", "first_name", "last_name", "email_address", "organization", "description"}).
+		AddRow(expectedUser.ID, expectedUser.UUID, expectedUser.FirstName, expectedUser.LastName, expectedUser.EmailAddress, expectedUser.Organization, expectedUser.Description)
+
 	mock.ExpectQuery(`(?i)SELECT \* FROM users WHERE uuid = \$1`).
 		WithArgs(expectedUser.UUID).
 		WillReturnRows(rows)
@@ -120,13 +112,7 @@ func TestCreateUser(t *testing.T) {
 	repo := UserRepository{db: sqlxDB}
 
 	// Define expected user and mock response
-	newUser := dmodel.User{
-		ID:           1,
-		UUID:         "1",
-		FirstName:    "FirstName1",
-		LastName:     "LastName1",
-		EmailAddress: "1@test.com",
-	}
+	newUser := test.CreateTestUser(1)
 
 	// Define expected behavior for mock
 	rows := sqlmock.NewRows([]string{"id"}).AddRow(1)
